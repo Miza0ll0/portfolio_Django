@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mon Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <style>
+        /* Reset et base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* En-tête */
+header {
+  background: #2c3e50;
+  color: white;
+  padding: 1rem 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+nav h1 {
+  font-size: 1.5rem;
+}
+
+nav ul {
+  display: flex;
+  gap: 1.5rem;
+}
+
+nav a {
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #3498db;
+}
+
+/* Hero */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #3498db, #2c3e50);
+  color: white;
+  text-align: center;
+}
+
+.hero h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero h2 span {
+  color: #f1c40f;
+}
+
+.hero p {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.btn {
+  background: #f1c40f;
+  color: #2c3e50;
+  padding: 0.8rem 2rem;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #e6b800;
+}
+
+/* Sections */
+.section {
+  padding: 5rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.2rem;
+  color: #2c3e50;
+}
+
+/* Projets */
+.projets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.projet {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.projet:hover {
+  transform: translateY(-5px);
+}
+
+/* Footer */
+footer {
+  background: #2c3e50;
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero h2 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+  }
+}
+    </style>
+  <!-- En-tête -->
+  <header>
+    <nav>
+      <h1>{{ about.name }}</h1>
+      <ul>
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#a-propos">À propos</a></li>
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Section d'accueil -->
+  <section id="accueil" class="hero">
+    <div class="hero-content">
+      <h2>Bonjour, je suis <span>{{ about.name }}</span></h2>
+      <p>{{ about.title }}</p>
+      <a href="#projets" class="btn">Voir mes projets</a>
+    </div>
+  </section>
+
+  <!-- À propos -->
+  <section id="a-propos" class="section">
+    <h2>À propos de moi</h2>
+    <p>{{ about.description }}</p>
+  </section>
+
+  <!-- Projets -->
+  <section id="projets" class="section">
+    <h2>Mes projets</h2>
+    <div class="projets-grid">
+     {% for project in projects %}
+  <div class="projet">
+    <h3>{{ project.title }}</h3>
+    <p>{{ project.description }}</p>
+    <p>Technoligies utilisées : {{ project.techno }}</p>
+  </div>
+  {% endfor %}
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <h2>Contactez-moi</h2>
+    <p>Email : {{ about.email }}</p>
+    <p>LinkedIn : <a href="{{ about.linkedin_url }}" target="_blank">...</a></p>
+    <p>Github : <a href="{{ about.github_url }}" target="_blank">{{ about.github_url }} </a> </p>
+  </section>
+
+  <!-- Pied de page -->
+  <footer>
+    <p>&copy; 2025 {{ about.name }}. Tous droits réservés.</p>
+  </footer>
+
+  <script>
+    // Smooth scroll pour les ancres
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href')).scrollIntoView({
+      behavior: 'smooth'
+    });
+  });
+});
+  </script>
+</body>
+</html>
