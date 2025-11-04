@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import About, Project
+from .models import About, Project, Exp
 
 @admin.register(About)
 class AboutAdmin(admin.ModelAdmin):
@@ -8,3 +8,4 @@ class AboutAdmin(admin.ModelAdmin):
         return not About.objects.exists()
 
 admin.site.register(Project)
+admin.site.register(Exp)

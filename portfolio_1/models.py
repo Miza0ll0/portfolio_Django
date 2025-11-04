@@ -9,7 +9,7 @@ class About(models.Model):
     title = models.CharField(max_length=150, verbose_name="Titre (ex: Développeur web)")
     description = models.TextField(verbose_name="Description à propos de vous")
     email = models.EmailField()
-    linkedin_url = models.URLField(blank=True, verbose_name="Lien LinkedIn")
+    linkedin_url = models.URLField(blank=True, verbose_name="Lien LinkedIn",default="Non spécifié")
     github_url = models.URLField(blank=True, verbose_name="Lien GitHub")
 
     def __str__(self):
@@ -37,3 +37,13 @@ class Project(models.Model):
         verbose_name = "Projet"
         verbose_name_plural = "Projets"
         ordering = ['-created_at']
+
+
+class Exp(models.Model):
+   
+    title = models.CharField(max_length=200, verbose_name="Titre du projet")
+    description = models.TextField(verbose_name="Description du projet")
+    created_at = models.DateField(auto_now_add=True, verbose_name="Durée")
+    #link = models.URLField(blank=True, verbose_name="Lien vers le projet (optionnel)")
+   # techno = models.TextField(verbose_name= "Technologie utiliser",default="Non spécifié")
+

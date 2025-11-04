@@ -168,6 +168,29 @@ footer {
   .hero p {
     font-size: 1.2rem;
   }
+  #desc {
+    color : red;
+    font-size: large;
+  }
+  /* Exp */
+.exps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.exp {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.exp:hover {
+  transform: translateY(-5px);
+}
 }
     </style>
   <!-- En-tête -->
@@ -204,19 +227,39 @@ footer {
     <div class="projets-grid">
      {% for project in projects %}
   <div class="projet">
-    <h3>{{ project.title }}</h3>
-    <p>{{ project.description }}</p>
-    <p>Technoligies utilisées : {{ project.techno }}</p>
+    <h3>{{ project.title }}</h3><br>
+    <p><span>Description : </span>{{ project.description }}</p><br>
+    <p>Technoligies utilisées : {{ project.techno }}</p><br><br>
+    <p>Lien Github : <a href="{{ project.link }}" target="_blank">{{ project.link }}</a></p>
+
   </div>
   {% endfor %}
     </div>
+  </section>
+
+  <!-- Exp -->
+  <section id="exps" class="section">
+       <h2>Mes experience</h2>
+    <div class="exps-grid">
+     {% for exp in exps %}
+  <div class="exp">
+    <h3>{{ exp.title }}</h3><br>
+    <p><span>Description : </span>{{ exp.description }}</p><br>
+    <p> Date : {{ exp.date }}</p>
+    
+
+  </div>
+  {% endfor %}
+    </div>
+
   </section>
 
   <!-- Contact -->
   <section id="contact" class="section">
     <h2>Contactez-moi</h2>
     <p>Email : {{ about.email }}</p>
-    <p>LinkedIn : <a href="{{ about.linkedin_url }}" target="_blank">...</a></p>
+
+    <p>LinkedIn : <a href="{{ about.linkedin_url }}" target="_blank">{{ about.linkedin_url }}</a></p>
     <p>Github : <a href="{{ about.github_url }}" target="_blank">{{ about.github_url }} </a> </p>
   </section>
 

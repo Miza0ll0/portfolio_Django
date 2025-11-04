@@ -18,7 +18,9 @@ from .models import *
 def portfolio_view(request):
     about = About.objects.first()
     projects = Project.objects.all()
+    exp = Exp.objects.all()
     return render(request, 'test.html', {
         'about': about,
         'projects': projects,
+        'exp': exp,
     })
