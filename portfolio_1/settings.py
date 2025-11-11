@@ -129,8 +129,13 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # ajoute ceci juste après
-    # ... (le reste de tes middlewares)
+    'whitenoise.middleware.WhiteNoiseMiddleware',          # juste après SecurityMiddleware
+    'django.contrib.sessions.middleware.SessionMiddleware', # indispensable pour admin
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware', # indispensable pour admin
+    'django.contrib.messages.middleware.MessageMiddleware',    # indispensable pour admin
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
